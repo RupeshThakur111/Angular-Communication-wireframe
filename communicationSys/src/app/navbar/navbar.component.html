@@ -1,0 +1,10 @@
+<div class="nv-bar">
+    <button type="button" class="btn btn-primary" class="nav-btn-1" (click)="CheckIfLoggedIn()"
+        [routerLink]="['/group-chat']"> Group Chat</button>
+    <button type="button" class="btn btn-primary" class="nav-btn-1" (click)="CheckIfLoggedIn()"
+        [routerLink]="['/users-management']">Manage Users</button>
+    <button type="button" class="btn btn-primary" class="nav-btn-1" (click)="CheckIfLoggedIn()"
+        [routerLink]="['/docs-management']">Manage Documents</button>
+    <button type="submit" class="btn btn-primary" class="nav-btn-1" (click)="logOutCall()"
+        [routerLink]="['/logout']">Logout</button>
+</div>

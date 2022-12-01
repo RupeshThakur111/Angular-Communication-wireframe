@@ -1,0 +1,59 @@
+<div class="register-div">
+  <h1 class="register-h1">Register</h1>
+  <form [formGroup]="RegisterForm" (ngSubmit)="save()">
+    <div class="mb-3 row">
+      <label for="inputname" class="col-sm-2 col-form-label">
+        <div class="text">Full Name</div>
+      </label>
+      <div class="col-sm-10">
+        <input type="text" id="name" formControlName="Fullname" placeholder="Fullname (required)"
+          [ngClass]="{'is-invalid': (RegisterForm.get('Fullname')?.touched || RegisterForm.get('Fullname')?.dirty) && !RegisterForm.get('Fullname')?.valid}" />
+        <span class="invalid-feedback">
+          <span *ngIf="RegisterForm.get('Fullname')?.errors?.['required']"> Fullname cannot be blank </span>
+        </span>
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="inputemail" class="col-sm-2 col-form-label">
+        <div class="text">Email</div>
+      </label>
+      <div class="col-sm-10">
+        <input type="email" id="email" formControlName="Email" placeholder="Email (required)"
+          [ngClass]="{'is-invalid': (RegisterForm.get('Email')?.touched || RegisterForm.get('Email')?.dirty) && !RegisterForm.get('Email')?.valid}" />
+        <span class="invalid-feedback">
+          <span *ngIf="RegisterForm.get('Email')?.errors?.['required']"> Email cannot be blank </span>
+        </span>
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">
+        <div class="text">Password</div>
+      </label>
+      <div class="col-sm-10">
+        <input type="password" id="inputPassword" formControlName="Password" placeholder="Password (required)"
+          [ngClass]="{'is-invalid': (RegisterForm.get('Password')?.touched || RegisterForm.get('Password')?.dirty) && !RegisterForm.get('Password')?.valid}" />
+        <span class="invalid-feedback">
+          <span *ngIf="RegisterForm.get('Password')?.errors?.['required']"> Password cannot be blank </span>
+        </span>
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">
+        <div class="text"> Confirm Password</div>
+      </label>
+      <div class="col-sm-10">
+        <input type="password" id="inputPassword" formControlName="ConfirmPassword"
+          placeholder="ConfirmPassword (required)"
+          [ngClass]="{'is-invalid': (RegisterForm.get('ConfirmPassword')?.touched || RegisterForm.get('ConfirmPassword')?.dirty) && !RegisterForm.get('ConfirmPassword')?.valid}" />
+        <span class="invalid-feedback">
+          <span *ngIf="RegisterForm.get('ConfirmPassword')?.errors?.['required']"> Confirm Password cannot be blank
+          </span>
+        </span>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" class="register-btn"
+      [disabled]="!RegisterForm.valid">Register</button>
+  </form>
+</div>
+
+<!-- [routerLink]="['/register-succesful']" -->

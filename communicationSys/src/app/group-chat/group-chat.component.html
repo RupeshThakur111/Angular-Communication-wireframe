@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+
+<div class="div-1">
+  <h4>Group Chat</h4>
+  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="38" fill="currentColor" class="bi bi-x-square"
+    viewBox="0 0 16 16" class="icon">
+    <path
+      d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+    <path
+      d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+  </svg>
+</div>
+<div class="container">
+  <p *ngFor="let datas of TextDataFromStorage">[{{date|date: 'yyyy-MM--dd HH:mm:ss'}}] &nbsp; &nbsp;{{datas.userName}}
+    :&nbsp; {{datas.text}} </p>
+</div>
+<div class="div-3">
+  <div class="inner-div">
+    <form [formGroup]="chatForm" (ngSubmit)="save()">
+      <label for=""> {{this.UserName}} &nbsp;&nbsp; </label> <input type="text" class="input-box"
+        formControlName="chatbox" placeholder="Text (required)"
+        [ngClass]="{'is-invalid': (chatForm.get('chatbox')?.touched || chatForm.get('chatbox')?.dirty) && !chatForm.get('chatbox')?.valid}" />
+      <span class="invalid-feedback">
+        <span *ngIf="chatForm.get('chatbox')?.errors?.['required']"> chatbox cannot be blank </span>
+      </span>
+      <button type="submit" class="btn btn-primary" class="btn-1" [disabled]="!chatForm.valid">Send</button>
+      <button type="button" class="btn btn-primary" class="btn-2" (click)="refresh()">Refresh</button>
+    </form>
+  </div>
+</div>

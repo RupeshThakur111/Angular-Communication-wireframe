@@ -1,0 +1,26 @@
+<div class="Login-id">
+    <h1>Login</h1>
+    <form [formGroup]="LoginForm" (ngSubmit)="save()">
+        <div>
+            <label for="email" class="label1"><b>
+                    <div class="label-div">Email </div>
+                </b></label>
+            <input type="email" formControlName="Email" placeholder="Email (required)"
+                [ngClass]="{'is-invalid': (LoginForm.get('Email')?.touched || LoginForm.get('Email')?.dirty) && !LoginForm.get('Email')?.valid}" />
+            <span class="invalid-feedback">
+                <span *ngIf="LoginForm.get('Email')?.errors?.['required']">Email cannot be blank</span>
+            </span>
+        </div>
+        <div>
+            <label for="password" class="label2">
+                <div class="label-div"><b>Password</b> </div>
+            </label>
+            <input type="password" formControlName="Password" placeholder="Password (required)" [ngClass]="{'is-invalid': (LoginForm.get('Password')?.touched || LoginForm.get('Password')?.dirty) &&
+            !LoginForm.get('Email')?.valid}" />
+            <span class="invalid-feedback">
+                <span *ngIf="LoginForm.get('Password')?.errors?.['required']">Password cannot be blank</span>
+            </span>
+        </div>
+        <button type="submit" class="login-btn" [disabled]="!LoginForm.valid">Login</button>
+    </form>
+</div>

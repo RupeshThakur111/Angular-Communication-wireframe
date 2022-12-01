@@ -1,0 +1,56 @@
+<app-navbar></app-navbar>
+<div class="div1">
+    <h2 class="h2">Users</h2>
+    <table class="table table-bordered table-hover table-striped">
+
+        <thead class="thead">
+            <tr>
+                <th>Name</th>
+                <th>User Email ID</th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let value of GetNameFromLocalStorage">
+                <td>{{value.Fullname}}</td>
+                <td>{{value.Email}}</td>
+                <div class="edit">
+                    <td>
+                        <a [routerLink]="['/edit',value.id]"><button type="button" class="btn btn-primary button:hover"
+                                class="td1" data-inline="true" id={{value.id}}>Edit |</button></a>
+                        <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
+                            data-bs-target="#modelId" class="td1" class="del-btn" idd="value.id"
+                            [disabled]="value.id==curentUSerid" (click)="delete(value.id)">
+                            Delete
+                        </button>
+                        <div class="model">
+                            <div class="modal fade" id="modelId" tabindex="-1" role="dialog"
+                                aria-labelledby="modelTitleId" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Confirmation User Deletion</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body" class="mdl-body">
+                                            <b>Are you Sure ?</b>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal"
+                                                class="btn-1" (click)="deleteUser()">
+                                                OK
+                                            </button>
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                                class="btn-2">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </div>
+            </tr>
+        </tbody>
+    </table>
+</div>

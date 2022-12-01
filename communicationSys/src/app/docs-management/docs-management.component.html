@@ -1,0 +1,143 @@
+<app-navbar></app-navbar>
+
+<div class="div1">
+    <h2 class="h2">My Uploads</h2>
+    <table class="table table-bordered table-hover table-striped">
+
+        <thead class="thead">
+            <tr>
+                <th>Label</th>
+                <th>File Name</th>
+                <th> Action </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let value of docsDataFromStorage">
+                <td>{{value.Label}}</td>
+                <td>{{value.filename}}</td>
+                <div class="edit">
+                    <td>
+                        <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
+                            data-bs-target="#modelId" class="td1" id={{value.id}} (click)="edit(value.id)">
+                            Edit |
+                        </button>
+
+                        <form class="NameChange" [formGroup]="NameChange">
+                            <div class="model">
+                                <div class="modal fade" id="modelId" tabindex="-1" role="dialog"
+                                    aria-labelledby="modelTitleId" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title1">Edit</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body" class="mdl-body">
+                                                <p class="decr-tx"><b>File Discription</b></p>
+                                            </div>
+
+                                            <input type="text" formControlName="EditNewName"
+                                                placeholder="EditNewName (required)" [ngClass]="{'is-invalid': (NameChange.get('EditNewName')?.touched || NameChange.get('EditNewName')?.dirty) &&
+                                            !NameChange.get('EditNewName')?.valid}" />
+                                            <span class="invalid-feedback">
+                                                <span
+                                                    *ngIf="NameChange.get('EditNewName')?.errors?.['required']">description
+                                                    cannot be
+                                                    blank</span>
+                                            </span>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                                    class="btn-11" [disabled]="!NameChange.valid" (click)="editdocs()">
+                                                    Save
+                                                </button>
+                                                <button type="button" class="btn btn-primary"
+                                                    class="btn-22">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal" class="del-121" (click)="delete(value.id)">
+                            Delete |
+                        </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel" class="mdl-title22">Confirm User
+                                            Deletion</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" class="mdl-body222">
+                                        Are you sure?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                            class="btn-101" (click)="deletedocs()">OK</button>
+                                        <button type="button" class="btn btn-primary" class="btn-102">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" class="td1" data-inline="true" class="share-btn"
+                            class="sharebtn">Share</button>
+                    </td>
+                </div>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+    class="upload-btn21">
+    + Add Upload
+</button>
+
+<!-- Modal -->
+<form class="upload-form" [formGroup]="uploadForm" (ngSubmit)="save()">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel" class="upload-title">Upload</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><b>File Discription</b></p>
+           
+                   <div class="docxEditModel">
+                    <input type="text" formControlName="description" placeholder="description (required)" [ngClass]="{'is-invalid': (uploadForm.get('description')?.touched || uploadForm.get('description')?.dirty) &&
+                    !uploadForm.get('description')?.valid}" />
+                            <span class="invalid-feedback">
+                                <span *ngIf="uploadForm.get('description')?.errors?.['required']">description cannot be
+                                    blank</span>
+                            </span>
+        
+                   </div>
+                    <p><b>File Upload</b></p>
+                    <input type="file" class="inpt-file" formControlName="UploadFile"
+                        placeholder="UploadFile (required)" [ngClass]="{'is-invalid': (uploadForm.get('UploadFile')?.touched || uploadForm.get('UploadFile')?.dirty) &&
+                !uploadForm.get('UploadFile')?.valid}" />
+                    <span class="invalid-feedback">
+                        <span *ngIf="uploadForm.get('UploadFile')?.errors?.['required']">description cannot be
+                            blank</span>
+                    </span>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal" class="mdl-btn32"
+                        [disabled]="!uploadForm.valid">Upload Now</button>
+                    <button type="button" class="btn btn-primary" class="mdl-btn33">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
